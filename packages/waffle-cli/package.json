@@ -3,7 +3,6 @@
   "version": "1.0.1",
   "description": "编写一个简单前端框架",
   "main": "./bin/waffle.js",
-  "private": true,
   "scripts": {
     "build:ts": "tsc -w",
     "build:es": "node esbuild.js",
