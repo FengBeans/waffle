@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [],
   "author": "jian.liu",
   "license": "ISC",
@@ -18,5 +21,6 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3"
-  }
+  },
+  "gitHead": "e3a40fbcbed27e50cc8da806e2044d13c3b653f7"
 }

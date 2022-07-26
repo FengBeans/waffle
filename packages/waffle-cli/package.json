@@ -27,6 +27,9 @@
   "bugs": {
     "url": "https://github.com/freeliujian/waffle/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/freeliujian/waffle#readme",
   "dependencies": {
     "@types/express": "^4.17.13",
@@ -38,5 +41,6 @@
     "semver": "6.1.0",
     "ws": "^8.8.1",
     "yargs-parser": "13.1.1"
-  }
+  },
+  "gitHead": "e3a40fbcbed27e50cc8da806e2044d13c3b653f7"
 }
