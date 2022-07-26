@@ -1,6 +1,6 @@
 {
   "name": "@fengbeans/waffle-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "编写一个简单前端框架",
   "main": "./bin/waffle.js",
   "scripts": {
