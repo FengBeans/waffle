@@ -9,7 +9,7 @@ const Home = () => {
               onClick={() => {
                   setText('Hi!')
               }}> {text} </p>
-          <Link to='/users'>Users</Link>
+          <Link to='/user'>Users</Link>
       </>);
 };
 
