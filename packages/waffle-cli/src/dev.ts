@@ -4,7 +4,7 @@ import { build } from 'esbuild';
 import path from "path";
 import portfinder from 'portfinder';
 import { createServer } from 'http';
-import { DEFAULT_OUTDIR, DEFAULT_PLATFORM, DEFAULT_PORT, DEFAULT_HOST } from './constants';
+import { DEFAULT_OUTDIR, DEFAULT_PLATFORM, DEFAULT_PORT, DEFAULT_HOST, DEFAULT_FRAMEWORK_NAME } from './constants';
 import { createWebSocketServer } from './server';
 import { style } from './styles';
 import { getAppData } from './appData';
@@ -32,8 +32,8 @@ export const dev = async () => {
     });
 
     app.use(`/${DEFAULT_OUTDIR}`, express.static(output));
-    app.use(`/waffle`, express.static(path.resolve(__dirname, 'client')));
-
+    app.use(`/waffle`, express.static(path.resolve(__dirname, 'client')))
+    console.log(output);
     const waffleServe = createServer(app);
     const ws = createWebSocketServer(waffleServe);
 
@@ -44,25 +44,24 @@ export const dev = async () => {
     waffleServe.listen(port, async () => {
         console.log(`App listening at http://${DEFAULT_HOST}:${port}`);
         
-        try {
+        try {    
             const appData = await getAppData({
               cwd
             });
             const routes = await getRoutes({ appData });
-            // 生成项目主入口
             await generateEntry({ appData, routes });
-            // 生成 Html
             await generateHtml({ appData });
       
             await build({
                 format: 'iife',
                 logLevel: 'error',
+                // outdir: appData.paths.absOutputPath,
+                outfile:`${appData.paths.absOutputPath}/${DEFAULT_FRAMEWORK_NAME}.js`,
                 entryPoints: [appData.paths.absEntryPath],
                 platform: DEFAULT_PLATFORM,
                 bundle: true,
                 watch: {   
                     onRebuild: (err, res) => {
-                    
                         if (err) {
                             console.error(JSON.stringify(err));
                             return;
@@ -78,8 +77,7 @@ export const dev = async () => {
                 plugins: [style()],
 
             });
-            // [Issues](https://github.com/evanw/esbuild/issues/805)
-            // 查了很多资料，esbuild serve 不能响应 onRebuild， esbuild build 和 express 组合不能不写入文件
+
         } catch (e) {
             console.log(e);
             process.exit(1);
