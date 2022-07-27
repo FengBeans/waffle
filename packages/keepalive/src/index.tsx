@@ -2,6 +2,26 @@ import React, { useRef, createContext, useContext } from 'react';
 import { useOutlet, useLocation, matchPath } from 'react-router-dom'
 import type { FC } from 'react';
 
+interface KeepAliveLayoutProps {
+    keepalive: any[];
+    keepElements?: any;
+    dropByCacheKey?: (path: string) => void;
+    children?:React.ReactNode
+}
+
+const KeepAliveLayout: FC<KeepAliveLayoutProps> = (props) => {
+    const { keepalive,children, ...other } = props;
+    const keepElements = React.useRef<any>({})
+    function dropByCacheKey(path: string) {
+        keepElements.current[path] = null;
+    }
+    return (
+        <KeepAliveContext.Provider value={{ keepalive, keepElements, dropByCacheKey }} {...other} >
+            {children}
+        </KeepAliveContext.Provider>
+    )
+}
+
 export const KeepAliveContext = createContext<KeepAliveLayoutProps>({ keepalive: [], keepElements: {} });
 
 const isKeepPath = (aliveList: any[], path: string) => {
@@ -40,26 +60,6 @@ export function useKeepOutlets() {
             {!isKeep && element}
         </div>
     </>
-}
-
-interface KeepAliveLayoutProps {
-    keepalive: any[];
-    keepElements?: any;
-    dropByCacheKey?: (path: string) => void;
-    children?:React.ReactNode
-}
-
-const KeepAliveLayout: FC<KeepAliveLayoutProps> = (props) => {
-    const { keepalive,children, ...other } = props;
-    const keepElements = React.useRef<any>({})
-    function dropByCacheKey(path: string) {
-        keepElements.current[path] = null;
-    }
-    return (
-        <KeepAliveContext.Provider value={{ keepalive, keepElements, dropByCacheKey }} {...other} >
-            {children}
-        </KeepAliveContext.Provider>
-    )
 }
 
 export default KeepAliveLayout;

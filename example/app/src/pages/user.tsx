@@ -14,7 +14,7 @@ const Me = () => {
   return (<><p> Me </p> <Link to='/'>go Home</Link></>);
 };
 
+export default Users;
 export {
-  Users,
   Me
-}
+};

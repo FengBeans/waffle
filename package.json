@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm -r -filter waffle-cli run build",
+    "build": "pnpm -r -filter waffle-cli run build:es",
     "dev": "pnpm -r -filter waffle-cli --parallel run dev"
   },
   "repository": {

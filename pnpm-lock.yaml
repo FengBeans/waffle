@@ -31,25 +31,27 @@ importers:
 
   example/app:
     specifiers:
+      '@fengbeans/keepalive': workspace:^1.0.3
+      '@fengbeans/waffle-cli': workspace:^1.0.3
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
-      '@waffle/keepalive': workspace:^1.0.0
+      '@types/react-router-dom': ^5.3.3
       react: ^18.2.0
       react-dom: ^18.2.0
       react-router: ^6.3.0
       react-router-dom: ^6.3.0
       serve: ^14.0.1
-      waffle-cli: workspace:^1.0.0
     dependencies:
-      '@types/react': 18.0.15
-      '@types/react-dom': 18.0.6
-      '@waffle/keepalive': link:../../packages/keepalive
+      '@fengbeans/keepalive': link:../../packages/keepalive
+      '@fengbeans/waffle-cli': link:../../packages/waffle-cli
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router: 6.3.0_react@18.2.0
       react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
-      waffle-cli: link:../../packages/waffle-cli
     devDependencies:
+      '@types/react': 18.0.15
+      '@types/react-dom': 18.0.6
+      '@types/react-router-dom': 5.3.3
       serve: 14.0.1
 
   packages/keepalive:
@@ -1275,6 +1277,7 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: true
 
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
@@ -1288,6 +1291,7 @@ packages:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
     dependencies:
       '@types/react': 18.0.15
+    dev: true
 
   /@types/react-router-dom/5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
@@ -1310,9 +1314,11 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
+    dev: true
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
 
   /@types/semver/7.3.10:
     resolution: {integrity: sha512-zsv3fsC7S84NN6nPK06u79oWgrPVd0NvOyqgghV1haPaFcVxIrP4DLomRwGAXk0ui4HZA7mOcSFL98sMVW9viw==}
@@ -2129,6 +2135,7 @@ packages:
 
   /csstype/3.1.0:
     resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
+    dev: true
 
   /dargs/7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}

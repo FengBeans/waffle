@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { useKeepOutlets } from '@waffle/keepalive';
+import { useKeepOutlets } from '@fengbeans/keepalive';
 import './index.css';
 
 const Layout = () => {

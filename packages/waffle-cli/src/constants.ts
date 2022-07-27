@@ -7,3 +7,4 @@ export const DEFAULT_HOST = '127.0.0.1';
 export const DEFAULT_PORT = 8888;
 export const DEFAULT_BUILD_PORT = 8989;
 export const DEFAULT_TEMPLATE= '.waffle';
+export const DEFAULT_CONFIG_FILE = 'waffle.config.ts'
