@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const Home = () => {
-  const [text, setText] = React.useState('Hello Malita!');
+  const [text, setText] = React.useState('Hello waffle!');
   return (
       <>
           <p

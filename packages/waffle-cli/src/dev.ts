@@ -11,6 +11,7 @@ import { getAppData } from './appData';
 import { getRoutes } from './routes';
 import { generateHtml } from './html';
 import { generateEntry } from './entry';
+import { getUserConfig } from './getUserConfig';
 
 export const dev = async () => {
     const cwd = process.cwd();
@@ -48,10 +49,17 @@ export const dev = async () => {
             const appData = await getAppData({
               cwd
             });
+            // 获取用户数据
+            const userConfig = await getUserConfig({
+                appData, sendMessage
+            });
+            // 获取 routes 配置
             const routes = await getRoutes({ appData });
-            await generateEntry({ appData, routes });
-            await generateHtml({ appData });
-      
+            // 生成项目主入口
+            await generateEntry({ appData, routes, userConfig });
+            // 生成 Html
+            await generateHtml({ appData, userConfig });
+
             await build({
                 format: 'iife',
                 logLevel: 'error',

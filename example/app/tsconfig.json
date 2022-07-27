@@ -20,7 +20,7 @@
   },
   "include": [
       "./src/**/*"
-, "waffle.config.ts"  ],
+, "src/waffle.config.ts"  ],
   "exclude": ["./node_modules"],
   "compileOnSave": true
 }

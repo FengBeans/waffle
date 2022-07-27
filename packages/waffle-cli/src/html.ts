@@ -1,9 +1,10 @@
 import { mkdir, writeFileSync } from 'fs';
+import { UserConfig } from 'getUserConfig';
 import path from 'path';
 import type { AppData } from './appData';
 import { DEFAULT_FRAMEWORK_NAME, DEFAULT_OUTDIR } from './constants';
 
-export const generateHtml = ({ appData }: { appData: AppData; }) => {
+export const generateHtml = ({ appData, userConfig }: { appData: AppData; userConfig: UserConfig }) => {
     return new Promise((resolve, rejects) => {
         const content = `
         <!DOCTYPE html>

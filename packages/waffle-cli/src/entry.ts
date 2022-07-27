@@ -3,6 +3,7 @@ import path from 'path';
 import { winPath } from './utils/winPath';
 import type { AppData } from './appData';
 import type { IRoute } from './routes';
+import { UserConfig } from './getUserConfig';
 
 let count = 1;
 const getRouteStr = (routes: IRoute[]) => {
@@ -22,7 +23,17 @@ const getRouteStr = (routes: IRoute[]) => {
     return { routesStr, importStr };
 }
 
-export const generateEntry = ({ appData, routes }: { appData: AppData; routes: IRoute[] }) => {
+const configStringify = (config: (string | RegExp)[]) => {
+    return config.map((item) => {
+        if (item instanceof RegExp) {
+            return item;
+        }
+        return `'${item}'`;
+    });
+};
+
+
+export const generateEntry = ({ appData, routes, userConfig }: { appData: AppData; routes: IRoute[]; userConfig: UserConfig }) => {
     return new Promise((resolve, rejects) => {
         count = 0;
         const { routesStr, importStr } = getRouteStr(routes);
@@ -32,9 +43,12 @@ import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, } from 'react-router-dom';
 import KeepAliveLayout from '@fengbeans/keepalive';
 ${importStr}
+
 const App = () => {
     return (
-        <KeepAliveLayout keepalive={[/./]}>
+        <KeepAliveLayout keepalive={[${configStringify(
+            (userConfig.keepalive) || [],
+        )}]}>
             <HashRouter>
                 <Routes>
                     ${routesStr}
@@ -43,6 +57,8 @@ const App = () => {
         </KeepAliveLayout>
     );
 }
+
+
 const root = createRoot(document.getElementById("waffle") as Element);
 root.render(React.createElement(App));
     `;
