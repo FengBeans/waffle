@@ -6,13 +6,15 @@ import { DEFAULT_FRAMEWORK_NAME, DEFAULT_OUTDIR } from './constants';
 
 export const generateHtml = ({ appData, userConfig }: { appData: AppData; userConfig: UserConfig }) => {
     return new Promise((resolve, rejects) => {
+
+        const title = userConfig?.title ?? appData.pkg.name ?? 'waffle';
         const content = `
         <!DOCTYPE html>
         <html lang="en">
         
         <head>
             <meta charset="UTF-8">
-            <title>${appData.pkg.name ?? 'waffle'}</title>
+            <title>${title}</title>
         </head>
         
         <body>

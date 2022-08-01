@@ -7,7 +7,7 @@ import { createServer } from 'http';
 import { DEFAULT_OUTDIR, DEFAULT_PLATFORM, DEFAULT_PORT, DEFAULT_HOST, DEFAULT_FRAMEWORK_NAME } from './constants';
 import { createWebSocketServer } from './server';
 import { style } from './styles';
-import { getAppData } from './appData';
+import { AppData, getAppData } from './appData';
 import { getRoutes } from './routes';
 import { generateHtml } from './html';
 import { generateEntry } from './entry';
@@ -34,13 +34,31 @@ export const dev = async () => {
 
     app.use(`/${DEFAULT_OUTDIR}`, express.static(output));
     app.use(`/waffle`, express.static(path.resolve(__dirname, 'client')))
-    console.log(output);
     const waffleServe = createServer(app);
     const ws = createWebSocketServer(waffleServe);
 
     function sendMessage(type: string, data?: any) {
         ws.send(JSON.stringify({ type, data }));
     }
+
+    const buildMain = async ({ appData }: { appData: AppData }) => {
+        // 获取用户数据
+        const userConfig = await getUserConfig({
+            appData, waffleServe
+        });
+        // 获取 routes 配置
+        const routes = await getRoutes({ appData });
+
+        // 生成项目主入口
+        await generateEntry({ appData, routes, userConfig });
+        // 生成 Html
+        await generateHtml({ appData, userConfig });
+    }
+
+    waffleServe.on('REBUILD', async ({ appData }) => {
+        await buildMain({ appData });
+        sendMessage('reload');
+    })
 
     waffleServe.listen(port, async () => {
         console.log(`App listening at http://${DEFAULT_HOST}:${port}`);
@@ -49,17 +67,7 @@ export const dev = async () => {
             const appData = await getAppData({
               cwd
             });
-            // 获取用户数据
-            const userConfig = await getUserConfig({
-                appData, sendMessage
-            });
-            // 获取 routes 配置
-            const routes = await getRoutes({ appData });
-            // 生成项目主入口
-            await generateEntry({ appData, routes, userConfig });
-            // 生成 Html
-            await generateHtml({ appData, userConfig });
-
+            buildMain({appData});
             await build({
                 format: 'iife',
                 logLevel: 'error',
@@ -74,8 +82,8 @@ export const dev = async () => {
                             console.error(JSON.stringify(err));
                             return;
                         }
-                    
-                        sendMessage('reload')
+                        console.log('reload')
+                        sendMessage('reload');
                     }
                 },
                 define: {

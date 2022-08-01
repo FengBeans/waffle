@@ -1,4 +1,5 @@
 export default {
-  title: 'Hello',
+  title: 'hello waffle',
   keepalive: [/./]
 }
+
