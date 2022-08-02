@@ -65,9 +65,10 @@ root.render(React.createElement(App));
         try {
             mkdir(path.dirname(appData.paths.absEntryPath), { recursive: true }, (err) => {
                 if (err) {
-                    rejects(err)
+                    rejects(err);
                 }
                 writeFileSync(appData.paths.absEntryPath, content, 'utf-8');
+                
                 resolve({})
             });
         } catch (error) {

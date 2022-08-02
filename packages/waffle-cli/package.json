@@ -5,7 +5,7 @@
   "main": "./bin/waffle.js",
   "scripts": {
     "build:ts": "tsc -w",
-    "build:es": "node esbuild.js",
+    "build": "node esbuild.js",
     "build:client": "pnpm esbuild ./src/client/client.ts --outdir=lib --bundle --external:esbuild",
     "dev": "pnpm build:es -- --watch",
     "test": "node ./dist/cli.js"
